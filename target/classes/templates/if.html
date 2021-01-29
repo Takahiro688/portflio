@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+		<h2>鈴木Java五郎さんですか？</h2>
+<body>
+
+	<h1 th:if="${suzuki}" th:text="${suzuki}"></h1>
+	<form action="/if" method="POST">
+		<input type="text" name="nameVal"> <!-- 文字列を入力 -->
+		<input type="submit"
+			, value="はい">
+	</form>
+</body>
+</html>

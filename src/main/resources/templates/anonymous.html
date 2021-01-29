@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css/mlp.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="timer">
+		<h2 th:text="${time}"></h2>
+	</div>
+
+	<div class="formpost">
+		<form method="post" action="/desk" th:object="${formModel}">
+			<div class="info">
+				<h1>2ちゃんねる掲示板</h1>
+				<label>投稿欄</label>
+				<textarea name="postcolumn"></textarea>
+					 <input type="submit" value="投稿">
+
+			</div>
+
+		</form>
+		<p>
+		<table>
+			<tr>
+				<th>2ちゃんねる</th>
+
+			</tr>
+			<tr th:each="c:${customers}">
+				<td th:text="${c.id}"></td>
+				<td th:text="${c.postcolumn}"></td>
+				<td th:text="${c.time}"></td>
+
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

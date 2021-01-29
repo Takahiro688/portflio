@@ -1,0 +1,21 @@
+
+h1 {
+	color: green;
+}
+
+input{
+	background-color:red;
+}
+
+body{
+	background-image: url("/image/gyalaxy.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	background-color: blue;
+}
+
+.formpost {
+	height:100vh;
+	background: rgba(255,255,255,0.6);
+}
