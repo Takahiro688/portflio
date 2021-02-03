@@ -2,17 +2,17 @@ package com.example.demo;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import javax.validation.constraints.Max ;
+import javax.validation.constraints.Min ;
+import javax.validation.constraints.NotNull ;
+import javax.validation.constraints.Size ;
 @SuppressWarnings("serial")
 @Entity
 @Table
 public class UserData implements Serializable{
 	
-		@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column
-		private long id;
+		@Id @GeneratedValue(strategy = GenerationType.AUTO) @Column private long id;
 		private static final long serialVersionUID = 1L;
 		
 		@Column(length = 20, nullable = false)
@@ -21,14 +21,14 @@ public class UserData implements Serializable{
 		private String mail;
 		@NotNull
 		@Min(0)
-		@Max(127)
-		@Column(nullable = true)
-		private int age;
-		@Column(nullable = true)
+		@Max(200)
+		@Column(nullable = false)
+		private Integer age;
+		@Column(nullable = false)
 		private String gender;
-		@Column(nullable = true)
+		@Column(nullable = false)
 		private String pass;
-		@Column(nullable = true)
+		@Column(nullable = false)
 		private String area;
 
 		public long getId(){ return id; }
