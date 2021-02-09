@@ -17,7 +17,7 @@ public class UserData implements Serializable{
 		
 		@Column(length = 20, nullable = false)
 		private String name;
-		@Column(length = 50, nullable = false)
+		@Column(length = 50, nullable =false)
 		private String mail;
 		@NotNull
 		@Min(0)
@@ -26,9 +26,9 @@ public class UserData implements Serializable{
 		private Integer age;
 		@Column(nullable = false)
 		private String gender;
-		@Column(nullable = false)
+		@Column(nullable = true)
 		private String pass;
-		@Column(nullable = false)
+		@Column(nullable = true)
 		private String area;
 
 		public long getId(){ return id; }
