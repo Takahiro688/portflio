@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form method="post" action="/userdb" th:object="${formModel}">
+	<h1>ユーザーデータ</h1>
+	<labeL>user_id</labeL><input type="text" name="name">
+	<labeL>貸出日</labeL><input type="text" name="loandate">
+	<labeL>返却日</labeL><input type="text" name="returndate">
+	<labeL>貸し出した本の名前</labeL><input type="text" name="bookname">
+	<labeL>本の番号</labeL><input type="text" name="bookid">
+	<input type="submit" value="登録">
+	</form>
+	
+	<table>
+	<tr><th>登録者番号</th><th>user_id</th><th>貸出日</th><th>返却日</th><th>貸し出した本の名前</th><th>本の番号</th>
+	<tr th:each="c : ${customers}">
+	<td th:text="${c.id}"></td>
+	<td th:text="${c.name}"></td>
+	<td th:text="${c.loandate}"></td>
+	<td th:text="${c.returndate}"></td>
+	<td th:text="${c.bookname}"></td>
+	<td th:text="${c.bookid}"></td>
+	</tr>
+	</table>
+</body>
+</html>

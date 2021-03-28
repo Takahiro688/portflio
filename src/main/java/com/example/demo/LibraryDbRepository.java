@@ -3,7 +3,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnonymousRepository extends
-JpaRepository<Anonymous,Long>{
+public interface LibraryDbRepository extends
+JpaRepository<LIbraryDB,Long>{
 
 }

@@ -17,6 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
+	@Autowired
+	UserDBRepository user;
+	
+	@Autowired
+	UserDataRepository repository;
+	
+	@Autowired
+	AnonymousRepository input;
+	
+	@Autowired
+	LibraryDbRepository sent;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView indexGet(ModelAndView mv) {
 		mv.addObject("math", "偶数・奇数の計算をします。");
@@ -123,23 +134,23 @@ public class MainController {
 
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public ModelAndView sampleGet(ModelAndView mv) {
-		
+
 		mv.addObject("name");
 		mv.setViewName("sample");
 		return mv;
 	}
 
 	@RequestMapping(value = "/top", method = RequestMethod.POST)
-	public ModelAndView samplePost(ModelAndView mv, @RequestParam("timeVal")String time,@RequestParam("nameVal") String name) {
+	public ModelAndView samplePost(ModelAndView mv, @RequestParam("timeVal") String time,
+			@RequestParam("nameVal") String name) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		mv.addObject("time",timestamp);
+		mv.addObject("time", timestamp);
 		mv.addObject("name", name);
 		mv.setViewName("sample");
 		return mv;
 	}
 
-	@Autowired
-	UserDataRepository repository;
+	
 
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
 	public ModelAndView formGet(ModelAndView mv) {
@@ -155,28 +166,75 @@ public class MainController {
 		return new ModelAndView("redirect:/form");
 	}
 
-	@Autowired
-	AnonymousRepository input;
+	
 
 	@RequestMapping(value = "/desk", method = RequestMethod.GET)
 	public ModelAndView deskGet(ModelAndView mv) {
 		List<Anonymous> customers = input.findAll();
-		
+
 		mv.addObject("customers", customers);
 		mv.setViewName("anonymous");
 		return mv;
 	}
 
 	@RequestMapping(value = "/desk", method = RequestMethod.POST)
-	public ModelAndView deskPost(@ModelAttribute("formModel") Anonymous anonyMous,ModelAndView mv
-			) {
+	public ModelAndView deskPost(@ModelAttribute("formModel") Anonymous anonyMous, ModelAndView mv) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		SimpleDateFormat daytime = new SimpleDateFormat("yyyy/MM/dd/HH:MM:ss");
 		String str = daytime.format(timestamp);
 		anonyMous.setTime(str);
 		input.saveAndFlush(anonyMous);
-		
+
 		return new ModelAndView("redirect:/desk");
 	}
 
+	
+
+	@RequestMapping(value = "/library", method = RequestMethod.GET)
+	public ModelAndView libraryGet(ModelAndView mv) {
+		List<LIbraryDB> customers = sent.findAll();
+		mv.addObject("customers", customers);
+		mv.setViewName("libraryDb");
+		return mv;
+	}
+
+	@RequestMapping(value = "/library", method = RequestMethod.POST)
+	public ModelAndView libraryPost(@ModelAttribute("formModel") LIbraryDB libraryDB, ModelAndView mv) {
+		sent.saveAndFlush(libraryDB);
+		return new ModelAndView("redirect:/library");
+	}
+
+
+	@RequestMapping(value = "/userdb", method = RequestMethod.GET)
+	public ModelAndView userdbGet(ModelAndView mv) {
+		List<UserDB> customers = user.findAll();
+		mv.addObject("customers", customers);
+		mv.setViewName("UserDB");
+		return mv;
+	}
+
+	@RequestMapping(value = "/userdb", method = RequestMethod.POST)
+	public ModelAndView userdbPost(@ModelAttribute("formModel") UserDB userDB, ModelAndView mv) {
+		userDB.setLibraryDB(sent.findById((long)1).get());
+		user.saveAndFlush(userDB);
+		return new ModelAndView("redirect:/userdb");
+	}
+
+	
+	
+
+	@RequestMapping(value = "/data", method = RequestMethod.GET)
+	public String dataGet(ModelAndView mv) {
+		List<UserDB> userDBList = user.findAll();
+		mv.addObject("userDBList", userDBList);
+		return "bbs/data";
+	}
+
+	// @RequestMapping(value = "/data",method = RequestMethod.POST)
+	// public String dataPOST(ModelAndView mv,@RequestParam("text")String
+	// text,LIbraryDB libraryDB) {
+
+	// }
+
 }
+//}

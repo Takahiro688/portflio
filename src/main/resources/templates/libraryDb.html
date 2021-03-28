@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themeleaf.org">
+<head>
+<meta http-equlv="content-type" charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<form method="post" action="/library" th:object="${formModel}">
+	<h1>図書館データーベース</h1>
+	<labeL>名前</labeL><input type="text" name="name">
+	<labeL>住所</labeL><input type="text" name="streetadress">
+	<labeL>連絡先</labeL><input type="text" name="contact">
+	<labeL>メールアドレス</labeL><input type="text" name="mail">
+	<labeL>性別</labeL><input type="radio" name="gender" value="男性">男性<input type="radio" name="gender" value="女性">女性
+	<input type="submit" value="登録">
+	</form>
+	<table>
+	<tr><th>登録者番号</th><th>名前</th><th>住所</th><th>連絡先</th><th>メールアドレス</th><th>性別</th></tr>
+	<tr th:each="c : ${customers}">
+	<td th:text="${c.id}"></td>
+	<td th:text="${c.name}"></td>
+	<td th:text="${c.streetadress}"></td>
+	<td th:text="${c.contact}"></td>
+	<td th:text="${c.mail}"></td>
+	<td th:text="${c.gender}"></td>
+	</tr>
+	</table>
+</body>
+</html>
